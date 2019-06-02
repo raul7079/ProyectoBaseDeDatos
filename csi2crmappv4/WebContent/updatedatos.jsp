@@ -21,6 +21,7 @@
 	form{
 		margin-left: 5%;
 		margin-top: 2%;
+		margin-bottom: 2%;
 	}
 
 </style>
@@ -46,7 +47,7 @@
 <form action="updatedatos.jsp" method="post" name="formulario">
 		<div class="form-group">
 			<label for="id">ID Medico</label> 
-			<input type="text" class="form-control" id="id" name="id" placeholder="Introduzca el id del instructor..." >
+			<input style="width:300px" type="text" class="form-control" id="id" name="id" placeholder="Introduzca el id del medico" >
 		</div>
 		<div class="form-group">
 		<label for="campo">Seleccione el campo que desea modificar</label> 
@@ -57,7 +58,7 @@
 		</div>
 		<div class="form-group">
 			<label for="valor">Nuevo valor</label> 
-			<input type="text" class="form-control" id="valor" name="valor" placeholder="Introduzca el valor nuevo...">
+			<input style="width:300px" type="text" class="form-control" id="valor" name="valor" placeholder="Introduzca el valor nuevo">
 		</div>
 		<input class="btn btn-primary" type="button" name="send" value="Actualizar" onclick="compruebayenvia();"/>
 	</form>

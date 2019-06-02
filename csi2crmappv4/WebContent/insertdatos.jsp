@@ -56,11 +56,11 @@
 		<div class="form-group">
 			<input style="visibility: hidden;" type="text" class="form-control" id="id" name="id" disabled>
 			<label for="nombre">Nombre</label> 
-			<input type="text" class="form-control" id="nombre" name="nombre" placeholder="Introduzca el nombre..." >
+			<input style="width:400px" type="text" class="form-control" id="nombre" name="nombre" placeholder="Introduzca el nombre" >
 		</div>
 		<div class="form-group">
 			<label for="apellidos">Apellido</label> 
-			<input type="text" class="form-control" id="apellidos" name="apellidos" placeholder ="Introduzca el apellido..." >
+			<input style="width:400px" type="text" class="form-control" id="apellidos" name="apellidos" placeholder ="Introduzca el apellido" >
 		</div>
 		<input id="incremento" class="btn btn-primary" type="button" name="send" value="Insertar" onclick="compruebayenvia();incrementar();"/>
 </form>
