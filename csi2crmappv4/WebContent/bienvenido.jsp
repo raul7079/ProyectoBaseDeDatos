@@ -71,24 +71,26 @@ if (!ok)
 <div>
 <a class="btn btn-primary" type="button" href="insertdatos.jsp">Insertar Datos</a>
 <a class="btn btn-primary" type="button" href="updatedatos.jsp">Modificar Datos</a>
+<a class="btn btn-primary" type="button" href="deletedatos.jsp">Borrar Datos</a>
 <a class="btn btn-danger" type="button" href="cerrarsesion.jsp">Salir</a>
 </div>
-
 <form action="./verdatos.jsp" method="post">
-Seleccione un nombre para ves sus visitas medicas: 
+Seleccione un nombre para ver sus visitas medicas: 
 <select name="nombre">
   <%
+  //Recorremos una tabla donde estan los datos de la query para sacar todos los datos de los pacientes
 				beanDB basededatos1 = new beanDB();
-				String query1 = "select idPaciente, nombre, apellidos from pacientes";
-				String[][] tablares = basededatos1.resConsultaSelectA3(query1);
-					for (int i = 0; i < tablares.length; i++) {
+				String querySelect = "select idPaciente, nombre, apellidos from pacientes";
+				String[][] tablares = basededatos1.resConsultaSelectA3(querySelect);
+				for (int i = 0; i < tablares.length; i++) {
+					//El value le pasamos el id del paciente
 			%>
 			<option value="<%=tablares[i][0]%>"><%=tablares[i][1] + " " + tablares[i][2]%>
 				<%
 					}
 				%>
 </select>
-<input class="btn btn-success" type="submit" name="send" value="Mostrar">
+<input class="btn btn-success" type="submit" name="send" value="Enviar">
 </form>
 <%
 

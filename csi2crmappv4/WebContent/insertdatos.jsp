@@ -6,8 +6,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insertar Datos</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<style type="text/css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"><style type="text/css">
 	a{
 		display: inline;
 	}
@@ -33,14 +32,6 @@
         else datos.submit();
     }
 
-	var cont = 0;
-	var id = 1117;
-	//Funcion para incrementar el id de los nuevos medicos cada vez que se hace click en el boton
-	function incrementar() {
-	    id = cont + 1;
-	    document.getElementById("id").innerHTML = id;
-	}
-
 </script>
 </head>
 <body>
@@ -54,7 +45,6 @@
 <form action="insertdatos.jsp" method="post" name="formulario">
 	<h4>Introduzca los datos: </h4>
 		<div class="form-group">
-			<input style="visibility: hidden;" type="text" class="form-control" id="id" name="id" disabled>
 			<label for="nombre">Nombre</label> 
 			<input style="width:400px" type="text" class="form-control" id="nombre" name="nombre" placeholder="Introduzca el nombre" >
 		</div>
@@ -69,9 +59,8 @@
 beanDB basededatos = new beanDB();
 String nombre = request.getParameter("nombre");
 String apellidos = request.getParameter("apellidos");
-String id = request.getParameter("id");
 if(nombre != null && apellidos != null){	
-	String queryInsert = "insert into medicos values(" + id + ", '" + nombre + "', '" + apellidos + "')";
+	String queryInsert = "insert into medicos (nombre, apellidos) values('" + nombre + "', '" + apellidos + "')";
 	basededatos.insert(queryInsert);
 }
 String query="select * from medicos";

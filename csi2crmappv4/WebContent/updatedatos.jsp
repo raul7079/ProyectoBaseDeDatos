@@ -26,7 +26,7 @@
 
 </style>
 <script type="text/javascript">
-	function compruebayenvia() {
+	function Comprobar() {
         datos = document.formulario;
         if (datos.id.value == '' ||
             datos.selectCampo.value == '' ||
@@ -45,35 +45,45 @@
 </div>
 
 <form action="updatedatos.jsp" method="post" name="formulario">
-		<div class="form-group">
-			<label for="id">ID Medico</label> 
-			<input style="width:300px" type="text" class="form-control" id="id" name="id" placeholder="Introduzca el id del medico" >
-		</div>
-		<div class="form-group">
+Seleccione un nombre para modificar: 
+<select name="update">
+  <%
+  //Recorremos una tabla donde estan los datos de la query para sacar todos los datos de los pacientes
+				beanDB basededatos1 = new beanDB();
+				String query = "select idMedico, nombre, apellidos from medicos";
+				String[][] tablares = basededatos1.resConsultaSelectA3(query);
+				for (int i = 0; i < tablares.length; i++) {
+					//El value le pasamos el id del paciente
+			%>
+			<option value="<%=tablares[i][0]%>"><%=tablares[i][1] + " " + tablares[i][2]%>
+				<%
+					}
+				%>
+</select>
 		<label for="campo">Seleccione el campo que desea modificar</label> 
 			<select id="campo" name="selectCampo">
 				<option value="nombre" selected>Nombre</option>
 				<option value="apellidos">Apellidos</option>
 			</select>
 		</div>
-		<div class="form-group">
+		<div>
 			<label for="valor">Nuevo valor</label> 
-			<input style="width:300px" type="text" class="form-control" id="valor" name="valor" placeholder="Introduzca el valor nuevo">
+			<input style="width:300px" type="text" id="valor" name="valor" placeholder="valor nuevo">
 		</div>
-		<input class="btn btn-primary" type="button" name="send" value="Actualizar" onclick="compruebayenvia();"/>
+		<input class="btn btn-success" type="button" name="send" value="Enviar" onclick="Comprobar();"/>
 	</form>
 
 <%
-beanDB basededatos = new beanDB();			
-String idMod = request.getParameter("id");
+beanDB basededatos = new beanDB();
+String idMedico = request.getParameter("update");
 String campo = request.getParameter("selectCampo");
 String valor = request.getParameter("valor");
-if(valor != null && idMod != null && valor != null){
-	 String queryUpdate = "update medicos set " + campo + "='" + valor + "' where idMedico=" + idMod;
+if(idMedico != null && valor != null){
+	 String queryUpdate = "update medicos set " + campo + "='" + valor + "' where idMedico=" + idMedico;
 	 basededatos.update(queryUpdate);
 }
-String query="select * from medicos";
-String [][] tablares = basededatos.resConsultaSelectA3(query);
+String query1="select * from medicos";
+String [][] tablares2 = basededatos.resConsultaSelectA3(query1);
 %>
 <table class="table">
 <%
@@ -86,14 +96,18 @@ String [][] tablares = basededatos.resConsultaSelectA3(query);
 		</tr>
 	</thead>
 	<%
-	for(int i = 0; i < tablares.length; i++) {
+	for(int i = 0; i < tablares2.length; i++) {
 		%>
 		<tr>
-	 		<td> <%= tablares[i][0] %> </td>
-	 		<td> <%= tablares[i][1] %> </td>
-	 		<td> <%= tablares[i][2] %> </td>
+	 		<td> <%= tablares2[i][0] %> </td>
+	 		<td> <%= tablares2[i][1] %> </td>
+	 		<td> <%= tablares2[i][2] %> </td>
 	 	</tr> <% 	 
 	}
 %>
 </table>
-
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
